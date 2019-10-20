@@ -1,2 +1,2 @@
 # iot-smart-little-car-raspberrypi
-an IoT smart little car's Raspberry Pi server and Android client
+An IoT smart little car that supports remote control, video feedback, image capture, and image recognition, with its Raspberry Pi server written in Kotlin and Python and its Android client written in Kotlin

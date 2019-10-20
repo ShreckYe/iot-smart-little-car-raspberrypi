@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IoT Smart Car</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="connect_to_a_host">Connect to a host</string>
+    <string name="connect">Connect</string>
+    <string name="a_host_address">A host address (an IP address or a domain name)</string>
+    <string name="close">Close</string>
+    <string name="cannot_connect_message">Cannot connect to the given host</string>
+    <string name="photo_captured">Photo captured</string>
+</resources>

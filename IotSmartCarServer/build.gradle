@@ -1,0 +1,90 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+    id 'c'
+    id 'com.google.protobuf' version "0.8.7"
+    id 'idea'
+    id 'application'
+}
+
+group 'shreckye.iotsmartcar'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/groups/public' }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    implementation 'io.netty:netty-all:4.1.32.Final'
+    implementation('io.grpc:grpc-all:1.17.1') /*{
+        exclude group: 'io.netty'
+    }*/
+    compile 'com.google.protobuf:protobuf-java:3.6.1'
+    //compile 'org.restcomm.media:rtp:7.0.16'
+    //compile 'org.restcomm.media:core:7.0.16'
+
+    //compile 'org.jcodec:jcodec:0.2.2'
+    //compile 'org.jcodec:jcodec-javase:0.2.2'
+    //compile 'org.jcodec:jcodec-android:0.2.2'
+    compile files('libs/asynchttpserver-1.0-alpha-20180315.jar')
+    implementation ('eu.medsea.mimeutil:mime-util:2.1.3') {
+        exclude group: 'org.slf4j'
+    }
+
+    compile 'com.github.sarxos:webcam-capture:0.3.12'
+    compile 'com.pi4j:pi4j-core:1.2-SNAPSHOT'
+    //compile group: "com.pi4j", name: "pi4j-core", version: "1.2-SNAPSHOT", changing: true
+    implementation 'com.github.Hopding:JRPiCam:v1.1.1'
+
+    compile 'org.tensorflow:tensorflow:1.12.0'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+mainClassName = "shreckye.iotsmartcar.server.MainKt"
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.6.1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.16.1'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+// Inform IDEs like IntelliJ IDEA, Eclipse or NetBeans about the generated code.
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
+// Generate IntelliJ IDEA's .idea & .iml project files
+
+/*model {
+    components {
+        c(NativeLibrarySpec)
+    }
+}*/

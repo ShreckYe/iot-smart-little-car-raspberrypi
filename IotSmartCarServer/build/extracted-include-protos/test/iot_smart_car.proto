@@ -1,0 +1,53 @@
+syntax = "proto3";
+package iotsmartcar.codec;
+
+//option java_multiple_files = true;
+option java_package = "shreckye.iotsmartcar.codec.proto";
+option java_outer_classname = "IotSmartCarProto";
+
+service ReliableService {
+    rpc Capture (CaptureRequest) returns (CaptureResponse) {
+    }
+    rpc GetPhotoList (GetPhotoListRequest) returns (stream PhotoItem) {
+    }
+    /*rpc GetPhoto (GetPhotoRequest) returns (stream Photo) {
+    }*/
+}
+message CaptureRequest {
+}
+message CaptureResponse {
+    int32 result_code = 1;
+}
+message GetPhotoListRequest {
+}
+message PhotoItem {
+    string filename = 1;
+    //bytes thumbnail = 2;
+    //repeated string tags = 3;
+}
+
+// For stream service
+message Data {
+    bytes image = 1;
+    ExtraData extra_data = 2;
+}
+
+message ExtraData {
+    string tag = 1;
+    sint32 temperature = 2;
+    int32 humidity = 3;
+    int32 illumination_intensity = 4;
+}
+
+// For control service
+message MotionControl {
+    WheelsControl wheels_control = 1;
+    HolderControl holder_control = 2;
+    int32 duration = 3;
+}
+message WheelsControl {
+    int32 direction = 1;
+}
+message HolderControl {
+
+}
